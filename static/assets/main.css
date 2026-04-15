@@ -1,0 +1,68 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; /* A cleaner font for a premium look */
+}
+
+/* Navbar Container */
+.navbar {
+  background-color: #0c1f3f; /* Deep Navy Background */
+  border-bottom: 3px solid #d4af37; /* Metallic Gold Accent */
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Logo Sizing */
+.logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+/* Navigation Menu */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #d4af37; /* Highlight Gold on hover */
+}
+
+/* Call to Action Button */
+.btn-book {
+  background-color: #d4af37 !important; /* Gold */
+  color: #0c1f3f !important; /* Navy Text */
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 700 !important;
+  transition: transform 0.2s ease !important;
+}
+
+.btn-book:hover {
+  background-color: #f1c40f !important; /* Brighter Gold */
+  transform: translateY(-2px);
+}

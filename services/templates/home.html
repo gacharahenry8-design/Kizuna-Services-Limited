@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Crest Services</title>
+
+  <style>
+    /* Reset defaults to fix the layout in your screenshots */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Navbar Container - Deep Navy and Gold theme */
+    .navbar {
+      background-color: #0c1f3f; /* Deep Navy from your brand colors */
+      border-bottom: 3px solid #d4af37; /* Metallic Gold Accent */
+      padding: 12px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between; /* Horizontal alignment */
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    /* Logo Image Styling */
+    .logo-img {
+      height: 55px;
+      width: auto;
+      display: block;
+    }
+
+    /* Navigation Links - Fixes the vertical list appearance */
+    .nav-links {
+      list-style: none; /* Removes bullet points */
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none; /* Removes blue underlines */
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #d4af37; /* Gold highlight */
+    }
+
+    /* Call to Action Button */
+    .btn-book {
+      background-color: #d4af37;
+      color: #0c1f3f !important;
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-weight: 700 !important;
+      transition: transform 0.2s ease !important;
+    }
+
+    .btn-book:hover {
+      background-color: #f1c40f;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <img src="{% static 'assets/img/logo.png' %}" alt="Golden Crest Services Logo" class="logo-img">
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact" class="btn-book">Book Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+</body>
+</html>
