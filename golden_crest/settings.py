@@ -59,14 +59,15 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug', # Add this
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static', # Add this
             ],
         },
     },
 ]
-
 WSGI_APPLICATION = 'golden_crest.wsgi.application'
 
 
@@ -111,14 +112,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Add the leading slash before 'static/'
+STATIC_URL = '/static/'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
-
-STATIC_URL = 'static/'
-ASE_DIR = Path(__file__).resolve().parent.parent
-
-# This is the line usually missing:
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]

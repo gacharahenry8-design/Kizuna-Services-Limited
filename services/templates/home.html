@@ -2,100 +2,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Golden Crest Services</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Crest Services | Professional Cleaning</title>
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-  <style>
-    /* Reset defaults to fix the layout in your screenshots */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
 
-    /* Navbar Container - Deep Navy and Gold theme */
-    .navbar {
-      background-color: #0c1f3f; /* Deep Navy from your brand colors */
-      border-bottom: 3px solid #d4af37; /* Metallic Gold Accent */
-      padding: 12px 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between; /* Horizontal alignment */
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 5%;
-    }
-
-    /* Logo Image Styling */
-    .logo-img {
-      height: 55px;
-      width: auto;
-      display: block;
-    }
-
-    /* Navigation Links - Fixes the vertical list appearance */
-    .nav-links {
-      list-style: none; /* Removes bullet points */
-      display: flex;
-      gap: 30px;
-      margin: 0;
-      align-items: center;
-    }
-
-    .nav-links a {
-      text-decoration: none; /* Removes blue underlines */
-      color: #ffffff;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: #d4af37; /* Gold highlight */
-    }
-
-    /* Call to Action Button */
-    .btn-book {
-      background-color: #d4af37;
-      color: #0c1f3f !important;
-      padding: 10px 22px;
-      border-radius: 4px;
-      font-weight: 700 !important;
-      transition: transform 0.2s ease !important;
-    }
-
-    .btn-book:hover {
-      background-color: #f1c40f;
-      transform: translateY(-2px);
-    }
-  </style>
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="/" class="logo">
-        <img src="{% static 'assets/img/logo.png' %}" alt="Golden Crest Services Logo" class="logo-img">
-      </a>
+    <header>
+        <div class="logo-container">
+           <img src="{% static 'images/logo.png' %}" alt="Golden Crest Services Logo" class="main-logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
 
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#contact" class="btn-book">Book Now</a></li>
-      </ul>
-    </div>
-  </nav>
+    <section class="hero">
+        <h1>PROFESSIONAL RESIDENTIAL & <br> COMMERCIAL CLEANING</h1>
+    </section>
+
+    <section class="services">
+        <h2>OUR PREMIER SERVICES</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon">🧹</div>
+                <h3>Deep Cleaning</h3>
+                <p>Thorough cleaning for every corner of your home or office.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🏢</div>
+                <h3>Office Cleaning</h3>
+                <p>Maintaining a professional and hygienic work environment.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">✨</div>
+                <h3>Specialized Carpet Care</h3>
+                <p>Revitalize your carpets with our advanced steam cleaning.</p>
+            </div>
+            </div>
+    </section>
+
+    <section class="action-section">
+        <div class="container-flex">
+           <div class="gallery-grid">
+              <div class="img-box"><img src="{% static 'images/room1.jpg' %}" alt="Clean Room"></div>
+              <div class="img-box"><img src="{% static 'images/room2.jpg' %}" alt="Clean Office"></div>
+              <div class="img-box"><img src="{% static 'images/room3.jpg' %}" alt="Clean Bedroom"></div>
+              <div class="img-box"><img src="{% static 'images/room4.jpg' %}" alt="Clean Kitchen"></div>
+            </div>
+
+            <div class="quote-form">
+                <h3>GET A FREE QUOTE</h3>
+                <form>
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="text" placeholder="Website">
+                    <textarea placeholder="Message" rows="4"></textarea>
+                    <button type="submit" class="btn-submit">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <a href="#" class="btn-book">BOOK YOUR SERVICE NOW</a>
+    </section>
+
+    <footer>
+        <div class="footer-info">
+            <p>📞 +(234) 234-7890</p>
+            <p>📧 goldencrestservices.com</p>
+        </div>
+        <div class="social-links">
+            <a href="#">𝕏</a>
+            <a href="#">f</a>
+            <a href="#">in</a>
+        </div>
+    </footer>
 
 </body>
 </html>

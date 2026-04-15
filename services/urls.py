@@ -18,11 +18,23 @@ from django.contrib import admin
 from django.urls import path
 from services import views
 
+from django.contrib import admin
+from django.urls import path
+from services import views
+# 1. Import settings and static helper
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('Services/', views.services, name='services'),
-    path('About/', views.about,name='about'),
+    path('About/', views.about, name='about'),
     path('Pricing/', views.pricing, name='pricing'),
     path('Contact/', views.contact, name='contact'),
     path('dashboard/', views.admin_dashboard, name='admin_dashboard'),
 ]
+
+# 2. Append static URL patterns
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.BASE_DIR / 'static')
