@@ -1,0 +1,152 @@
+header {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.main-logo {
+    max-width: 250px; /* Adjust based on your logo size */
+    margin-bottom: 15px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #003366; /* Deep blue from your logo */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.hero {
+    background-color: #f8f8f8;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.service-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.service-card .icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: #d4af37; /* Gold color */
+}
+.container-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-width: 500px;
+}
+
+.img-box img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover; /* Keeps images from stretching */
+    border-radius: 5px;
+}
+
+.quote-form {
+    background: #f4f4f4;
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+}
+.btn-book {
+    display: inline-block;
+    background-color: #003366;
+    color: white;
+    padding: 15px 40px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 40px 0;
+}
+
+.cta {
+    text-align: center;
+}
+/* Service Card Styling */
+/* Service Section Layout */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Forces 3 columns */
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.service-card {
+    background: #fff;
+    padding: 40px 20px;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.service-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Circular Icons for Services */
+.service-card .icon {
+    width: 65px;
+    height: 65px;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 50%; /* Makes the circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.5rem;
+}
+
+/* Side-by-Side Layout for Gallery & Form */
+.container-flex {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Gallery on left, Form on right */
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 5%;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid for the 4 images */
+    gap: 15px;
+}
+
+.img-box img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* Keeps images from looking squished */
+    border-radius: 10px;
+}
