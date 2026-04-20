@@ -112,9 +112,17 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Add the leading slash before 'static/'
-STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = 'static/'
+
+# This tells Django where to find the 'static' folder in your root directory
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

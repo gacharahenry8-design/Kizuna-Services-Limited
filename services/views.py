@@ -1,27 +1,18 @@
-from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-
-# Create your views here.
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import QuoteForm  # Make sure you've created forms.py
 
 
 def home(request):
-    return render(request, 'home.html')
+    if request.method == 'POST':
+        form = QuoteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # This adds a success message that you can display in your HTML
+            messages.success(request, "Your quote request has been sent successfully!")
+            return redirect('home')
+    else:
+        form = QuoteForm()
 
-def about(request):
-    return render(request, 'about.html')
+    return render(request, 'home.html', {'form': form})
 
-def contact(request):
-    return render(request, 'contact.html')
-
-def pricing(request):
-    return render(request, 'pricing.html')
-
-def services(request):
-    return render(request, 'services.html')
-
-
-
-@staff_member_required
-def admin_dashboard(request):
-    return render(request, 'admin_dashboard.html')

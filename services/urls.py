@@ -28,11 +28,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('Services/', views.services, name='services'),
-    path('About/', views.about, name='about'),
-    path('Pricing/', views.pricing, name='pricing'),
-    path('Contact/', views.contact, name='contact'),
-    path('dashboard/', views.admin_dashboard, name='admin_dashboard'),
+
+
 ]
 
 # 2. Append static URL patterns
