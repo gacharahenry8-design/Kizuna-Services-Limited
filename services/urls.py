@@ -28,8 +28,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-
-
+    path('services/', views.services, name='services'),
+    path('about/', views.about, name='about'),
+    path('gallery/', views.gallery, name='gallery'),
 ]
 
 # 2. Append static URL patterns

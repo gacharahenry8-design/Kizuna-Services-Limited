@@ -16,3 +16,12 @@ def home(request):
 
     return render(request, 'home.html', {'form': form})
 
+
+def services(request):
+    return render(request, 'services.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def gallery(request):
+    return render(request, 'gallery.html')

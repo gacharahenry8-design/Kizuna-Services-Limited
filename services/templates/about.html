@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Golden Crest Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/services/">Services</a></li>
+                <li><a href="/about/" class="active">About</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <h1>ABOUT US</h1>
+            <p>Nairobi's trusted cleaning professionals — delivering spotless spaces since day one.</p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="about-story">
+        <div class="about-container">
+            <div class="story-text">
+                <span class="section-tag">Our Story</span>
+                <h2>Built on Trust, Driven by Excellence</h2>
+                <p>Golden Crest Services was founded with a simple belief — every space deserves to be clean, healthy, and welcoming. Based in Kasarani, Nairobi, we started as a small residential cleaning team and have grown into a full-service cleaning company serving homes, offices, and commercial spaces across the city.</p>
+                <p>Over the years, we have built a reputation for reliability, attention to detail, and a genuine commitment to customer satisfaction. Our team is professionally trained, fully insured, and passionate about delivering results that exceed expectations every single time.</p>
+            </div>
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&auto=format&fit=crop" alt="Cleaning team at work">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="about-stats">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">8+</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">12</span>
+                <span class="stat-label">Team Members</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Insured & Certified</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="about-mission">
+        <div class="about-container">
+            <div class="mission-card">
+                <div class="mission-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Our Mission</h3>
+                <p>To provide exceptional, reliable, and affordable cleaning services that create healthier, happier environments for our clients — delivered with professionalism and care on every visit.</p>
+            </div>
+            <div class="mission-card">
+                <div class="mission-icon"><i class="fas fa-eye"></i></div>
+                <h3>Our Vision</h3>
+                <p>To be the most trusted cleaning company in Nairobi and beyond — recognized for our consistent quality, eco-conscious practices, and the lasting relationships we build with our clients.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="about-values">
+        <div class="values-inner">
+            <span class="section-tag centered">What We Stand For</span>
+            <h2 class="centered">Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h4>Integrity</h4>
+                    <p>We are honest, transparent, and accountable in everything we do.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-star"></i></div>
+                    <h4>Excellence</h4>
+                    <p>We hold ourselves to the highest standards and never cut corners.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-handshake"></i></div>
+                    <h4>Reliability</h4>
+                    <p>We show up on time, every time, and deliver what we promise.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-leaf"></i></div>
+                    <h4>Eco-Conscious</h4>
+                    <p>We use safe, environmentally friendly products wherever possible.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-heart"></i></div>
+                    <h4>Care</h4>
+                    <p>We treat every client's space as if it were our own.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon"><i class="fas fa-users"></i></div>
+                    <h4>Teamwork</h4>
+                    <p>We collaborate, support each other, and grow together as a team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="about-team">
+        <div class="values-inner">
+            <span class="section-tag centered">The People Behind the Clean</span>
+            <h2 class="centered">Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fas fa-user"></i></div>
+                    <h4>James Mwangi</h4>
+                    <span class="team-role">Founder & CEO</span>
+                    <p>Leads the company vision and ensures every client receives the Golden Crest standard.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fas fa-user"></i></div>
+                    <h4>Grace Achieng</h4>
+                    <span class="team-role">Operations Manager</span>
+                    <p>Oversees day-to-day scheduling, team deployment, and quality control.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fas fa-user"></i></div>
+                    <h4>Brian Otieno</h4>
+                    <span class="team-role">Head of Commercial Cleaning</span>
+                    <p>Manages all office and commercial contracts with precision and professionalism.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar"><i class="fas fa-user"></i></div>
+                    <h4>Faith Njeri</h4>
+                    <span class="team-role">Customer Relations</span>
+                    <p>Your first point of contact — always ready to help you book and answer questions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cta-container">
+        <a href="#" class="btn-blue">BOOK YOUR SERVICE NOW</a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
+                <span><i class="fas fa-envelope"></i> info@goldencrestservices.co.ke</span>
+                <span><i class="fas fa-phone"></i> +254 707 932 580</span>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
