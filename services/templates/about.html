@@ -133,30 +133,22 @@
             <span class="section-tag centered">The People Behind the Clean</span>
             <h2 class="centered">Meet Our Team</h2>
             <div class="team-grid">
+                {% for person in staff %}
                 <div class="team-card">
-                    <div class="team-avatar"><i class="fas fa-user"></i></div>
-                    <h4>James Mwangi</h4>
-                    <span class="team-role">Founder & CEO</span>
-                    <p>Leads the company vision and ensures every client receives the Golden Crest standard.</p>
+                    <div class="team-avatar">
+                        {% if person.image %}
+                            <img src="{{ person.image.url }}" alt="{{ person.name }}" class="w-full h-full rounded-full object-cover">
+                        {% else %}
+                            <i class="fas fa-user"></i>
+                        {% endif %}
+                    </div>
+                    <h4>{{ person.name }}</h4>
+                    <span class="team-role">{{ person.role }}</span>
+                    <p>{{ person.bio }}</p>
                 </div>
-                <div class="team-card">
-                    <div class="team-avatar"><i class="fas fa-user"></i></div>
-                    <h4>Grace Achieng</h4>
-                    <span class="team-role">Operations Manager</span>
-                    <p>Oversees day-to-day scheduling, team deployment, and quality control.</p>
-                </div>
-                <div class="team-card">
-                    <div class="team-avatar"><i class="fas fa-user"></i></div>
-                    <h4>Brian Otieno</h4>
-                    <span class="team-role">Head of Commercial Cleaning</span>
-                    <p>Manages all office and commercial contracts with precision and professionalism.</p>
-                </div>
-                <div class="team-card">
-                    <div class="team-avatar"><i class="fas fa-user"></i></div>
-                    <h4>Faith Njeri</h4>
-                    <span class="team-role">Customer Relations</span>
-                    <p>Your first point of contact — always ready to help you book and answer questions.</p>
-                </div>
+                {% empty %}
+                <p>Our team is currently busy providing the Golden Crest standard!</p>
+                {% endfor %}
             </div>
         </div>
     </section>

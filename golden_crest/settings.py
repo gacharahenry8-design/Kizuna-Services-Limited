@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,22 +54,34 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'golden_crest.urls'
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], # <--- MAKE SURE THIS LINE IS HERE
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug', # Add this
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.static', # Add this
             ],
         },
     },
 ]
+# 2. Update Static files configuration
+STATIC_URL = '/static/'
+
+# This is where Django looks for files during development
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# Add this line: This is where files are collected for production
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 WSGI_APPLICATION = 'golden_crest.wsgi.application'
 
 
@@ -116,13 +130,7 @@ USE_TZ = True
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = 'static/'
 
-# This tells Django where to find the 'static' folder in your root directory
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

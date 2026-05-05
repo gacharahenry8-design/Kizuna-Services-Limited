@@ -97,12 +97,14 @@
 
             <div class="form-wrapper">
                 <h3>GET A FREE QUOTE</h3>
-                <form method="POST">
+                <form method="POST" action="{% url 'home' %}">
                     {% csrf_token %}
                     <input type="text" name="name" placeholder="Name" required>
                     <input type="email" name="email" placeholder="Email" required>
-                    <input type="text" name="website" placeholder="Website">
-                    <textarea name="message" placeholder="Message" rows="4"></textarea>
+                    <input type="text" name="website" placeholder="Website (Optional)">
+
+                    <textarea name="message" placeholder="Message" rows="4" required></textarea>
+
                     <button type="submit" class="form-submit-btn">SUBMIT</button>
                 </form>
             </div>

@@ -1,0 +1,139 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+
+{% block page_title %}Service Inventory Management{% endblock %}
+
+{% block dashboard_content %}
+<div x-data="{
+    showForm: false,
+    title: '',
+    icon: '',
+    iconMap: {
+        'cleaning': 'fas fa-broom',
+        'office': 'fas fa-building',
+        'window': 'fas fa-window-maximize',
+        'carpet': 'fas fa-rug',
+        'garden': 'fas fa-leaf',
+        'residential': 'fas fa-home',
+        'commercial': 'fas fa-city',
+        'deep': 'fas fa-soap'
+    },
+    updateIcon() {
+        const lowerTitle = this.title.toLowerCase();
+        for (let keyword in this.iconMap) {
+            if (lowerTitle.includes(keyword)) {
+                this.icon = this.iconMap[keyword];
+                break;
+            }
+        }
+    }
+}">
+
+    <div x-show="showForm" x-transition class="mb-8 bg-white p-6 rounded-xl shadow-lg border-t-4 border-[#0a3d62]">
+        <h3 class="text-xl font-bold mb-4">Add a Permanent Service</h3>
+            <form method="POST" action="{% url 'add_service' %}">
+                {% csrf_token %}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input type="text" name="title" x-model="title" @input="updateIcon()"
+                           placeholder="Service Name" required class="border p-2 rounded">
+
+                    <select name="category" class="border p-2 rounded">
+                        <option value="Residential">Residential</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Specialty">Specialty</option>
+                    </select>
+
+                    <input type="number" name="price" placeholder="Starting Price (KES)" class="border p-2 rounded">
+
+                    <div class="relative">
+                        <input type="text" name="icon" x-model="icon"
+                               placeholder="Icon" class="border p-2 rounded w-full pl-10">
+                        <div class="absolute left-3 top-3 text-gray-400">
+                            <i :class="icon || 'fas fa-search'"></i>
+                        </div>
+                    </div>
+
+                    <textarea name="description" placeholder="Service Description..." class="border p-2 rounded md:col-span-2"></textarea>
+                </div>
+
+                <div class="mt-4 flex gap-2">
+                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                        Save to Database
+                    </button>
+                    <button type="button" @click="showForm = false" class="bg-gray-200 px-4 py-2 rounded">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+            <div>
+                <h3 class="text-lg font-bold text-gray-800">Active Service Menu</h3>
+                <p class="text-sm text-gray-500">Updates here reflect immediately on the public website.</p>
+            </div>
+            <button @click="showForm = !showForm" class="bg-[#0a3d62] text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition text-sm font-semibold">
+                <i class="fas fa-plus mr-2"></i> Create New Service
+            </button>
+        </div>
+
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-100 text-gray-600 uppercase text-xs font-bold">
+                    <th class="px-6 py-4">Icon & Name</th>
+                    <th class="px-6 py-4">Category</th>
+                    <th class="px-6 py-4">Price</th>
+                    <th class="px-6 py-4 text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for service in services %}
+                <tr class="hover:bg-blue-50 transition">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3">
+                                <i class="{{ service.icon_class|default:'fas fa-broom' }}"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900">{{ service.title }}</div>
+                                <div class="text-xs text-gray-500">{{ service.description|truncatechars:40 }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-semibold
+                            {% if service.category == 'Residential' %} bg-green-100 text-green-700
+                            {% elif service.category == 'Commercial' %} bg-purple-100 text-purple-700
+                            {% else %} bg-orange-100 text-orange-700 {% endif %}">
+                            {{ service.category }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm font-medium">KES {{ service.price_start }}</td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex justify-end space-x-3">
+                            <a href="{% url 'edit_service' service.pk %}" class="text-blue-500 hover:text-blue-700">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="{% url 'delete_service' service.pk %}" method="POST" class="inline" onsubmit="return confirm('Permanently delete this service?');">
+                                {% csrf_token %}
+                                <button type="submit" class="text-red-400 hover:text-red-600">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="px-6 py-12 text-center text-gray-400 italic">
+                        No services found. Click "Create New Service" to get started.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+{% endblock %}

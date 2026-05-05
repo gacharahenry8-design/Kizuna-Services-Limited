@@ -1,38 +1,26 @@
-"""
-URL configuration for golden_crest project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
 from django.urls import path
-from services import views
-
-from django.contrib import admin
-from django.urls import path
-from services import views
-# 1. Import settings and static helper
-from django.conf import settings
-from django.conf.urls.static import static
+from . import views
+from django.contrib.auth import views as auth_views  # Make sure this import is here
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # Main Website Pages
     path('', views.home, name='home'),
     path('services/', views.services, name='services'),
     path('about/', views.about, name='about'),
     path('gallery/', views.gallery, name='gallery'),
-]
 
-# 2. Append static URL patterns
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.BASE_DIR / 'static')
+    # Custom Dashboard
+    path('dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('dashboard/inquiries/', views.inquiries_list, name='inquiries_list'),
+    path('dashboard/services/', views.services_manage, name='services_manage'),
+    path('dashboard/services/add/', views.add_service, name='add_service'),
+    path('dashboard/services/edit/<int:pk>/', views.edit_service, name='edit_service'),
+    path('dashboard/services/delete/<int:pk>/', views.delete_service, name='delete_service'),
+    path('dashboard/gallery/', views.gallery_manage, name='gallery_manage'),
+    path('dashboard/gallery/delete/<int:pk>/', views.delete_gallery_image, name='delete_gallery_image'),
+    path('dashboard/staff/', views.staff_manage, name='staff_manage'),
+    path('dashboard/staff/delete/<int:pk>/', views.delete_staff, name='delete_staff'),
+    path('dashboard/staff/edit/<int:pk>/', views.edit_staff, name='edit_staff'),
+    # Logout path
+    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
+]

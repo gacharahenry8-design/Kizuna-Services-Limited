@@ -1,0 +1,57 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+
+{% block dashboard_content %}
+<div x-data="{ showForm: false }">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">Team Management</h2>
+        <button @click="showForm = !showForm" class="bg-blue-600 text-white px-4 py-2 rounded">
+            + Add Team Member
+        </button>
+    </div>
+
+    <div x-show="showForm" class="bg-white p-6 rounded-lg shadow mb-8">
+        <form method="POST" enctype="multipart/form-data" action="{% url 'staff_manage' %}">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" name="name" placeholder="Full Name" required class="border p-2 rounded">
+                <input type="text" name="role" placeholder="Role (e.g. CEO)" required class="border p-2 rounded">
+                <textarea name="bio" placeholder="Short Bio" class="border p-2 rounded md:col-span-2"></textarea>
+                <input type="file" name="image" class="border p-1 rounded">
+            </div>
+            <button type="submit" class="mt-4 bg-green-600 text-white px-4 py-2 rounded">Save Member</button>
+        </form>
+    </div>
+
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <table class="w-full text-left">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="p-4">Name</th>
+                    <th class="p-4">Role</th>
+                    <th class="p-4 text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for person in staff %}
+                <tr class="border-t">
+                    <td class="p-4 font-bold">{{ person.name }}</td>
+                    <td class="p-4 text-blue-600">{{ person.role }}</td>
+                    <td class="p-4 text-right flex justify-end items-center gap-4">
+                        <a href="{% url 'edit_staff' person.pk %}" class="text-blue-500 hover:text-blue-700">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <form action="{% url 'delete_staff' person.pk %}" method="POST" onsubmit="return confirm('Are you sure?');" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="text-red-500 hover:text-red-700">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

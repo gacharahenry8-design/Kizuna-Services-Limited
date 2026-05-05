@@ -4,4 +4,5 @@ from .models import QuoteRequest
 class QuoteForm(forms.ModelForm):
     class Meta:
         model = QuoteRequest
-        fields = ['name', 'email', 'website', 'message']
+        # Ensure 'website' is in this list if you want it on the form
+        fields = ['name', 'email', 'phone', 'website', 'service_type', 'message']

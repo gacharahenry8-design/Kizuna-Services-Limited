@@ -1,0 +1,54 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+
+{% block page_title %}Service Inquiries{% endblock %}
+
+{% block dashboard_content %}
+<div class="bg-white rounded-xl shadow-sm overflow-hidden border">
+    <div class="p-6 border-b flex justify-between items-center">
+        <h3 class="text-lg font-bold text-gray-800">Client Requests</h3>
+        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">
+            {{ inquiries.count }} Total
+        </span>
+    </div>
+
+    <table class="w-full text-left border-collapse">
+        <thead class="bg-gray-50">
+            <tr class="text-gray-600 text-sm uppercase">
+                <th class="p-4 font-bold border-b">Customer</th>
+                <th class="p-4 font-bold border-b">Contact Info</th>
+                <th class="p-4 font-bold border-b">Message</th>
+                <th class="p-4 font-bold border-b text-center">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inquiry in inquiries %}
+            <tr class="hover:bg-gray-50 transition border-b">
+                <td class="p-4">
+                    <div class="font-bold text-gray-800">{{ inquiry.name }}</div>
+                    <div class="text-xs text-gray-400">{{ inquiry.created_at|date:"D, d M Y" }}</div>
+                </td>
+                <td class="p-4">
+                    <div class="text-sm text-blue-600">{{ inquiry.email }}</div>
+                    {% if inquiry.website %}
+                    <div class="text-xs text-gray-500">{{ inquiry.website }}</div>
+                    {% endif %}
+                </td>
+                <td class="p-4 text-sm text-gray-600">
+                    {{ inquiry.message|truncatewords:15 }}
+                </td>
+                <td class="p-4 text-center">
+                    <span class="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full font-bold">Received</span>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="p-12 text-center text-gray-400">
+                    <i class="fas fa-inbox text-4xl mb-2 block"></i>
+                    No inquiries recorded yet.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
