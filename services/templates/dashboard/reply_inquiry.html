@@ -1,0 +1,25 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+{% block page_title %}Reply to Inquiry{% endblock %}
+{% block dashboard_content %}
+<div style="max-width: 600px; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+    <p style="margin-bottom: 20px; color: #555;">
+        Replying to <strong>{{ inquiry.name }}</strong> at <strong>{{ inquiry.email }}</strong>
+    </p>
+    <form method="POST">
+        {% csrf_token %}
+        <label style="font-weight: bold; display: block; margin-bottom: 5px;">Subject</label>
+        <input type="text" name="subject" value="Re: Your inquiry at Golden Crest Services"
+            style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px;">
+        <label style="font-weight: bold; display: block; margin-bottom: 5px;">Message</label>
+        <textarea name="message" rows="8"
+            style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:5px;"
+            placeholder="Type your reply here..."></textarea>
+        <button type="submit"
+            style="background:#0a3d62; color:white; padding:12px 30px; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">
+            Send Reply
+        </button>
+        <a href="{% url 'inquiries_list' %}"
+            style="margin-left:15px; color:#666; text-decoration:none;">Cancel</a>
+    </form>
+</div>
+{% endblock %}

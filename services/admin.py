@@ -1,8 +1,16 @@
-from django.contrib import admin
 
-# Register your models here.
 from django.contrib import admin
-from .models import Service, GalleryImage, StaffMember, QuoteRequest
+from .models import Service, GalleryImage, StaffMember, QuoteRequest, Inquiry
+
+
+# ... (Keep your existing ServiceAdmin, GalleryImageAdmin, etc.)
+
+@admin.register(Inquiry)
+class InquiryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('name', 'email', 'message')
+    readonly_fields = ('created_at',)
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):

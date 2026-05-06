@@ -20,7 +20,7 @@
                 <li><a href="/services/">Services</a></li>
                 <li><a href="/about/">About</a></li>
                 <li><a href="/gallery/">Gallery</a></li>
-                <li><a href="#">Book Now</a></li>
+                <li><a href="{% url 'book' %}">Book Now</a></li>
             </ul>
         </nav>
     </header>
@@ -97,22 +97,28 @@
 
             <div class="form-wrapper">
                 <h3>GET A FREE QUOTE</h3>
-                <form method="POST" action="{% url 'home' %}">
+               <form method="POST" action="{% url 'home' %}">
                     {% csrf_token %}
                     <input type="text" name="name" placeholder="Name" required>
                     <input type="email" name="email" placeholder="Email" required>
+                    <input type="text" name="phone" placeholder="Phone Number">
                     <input type="text" name="website" placeholder="Website (Optional)">
-
+                    <select name="service_type" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
+                        <option value="General Cleaning">General Cleaning</option>
+                        <option value="Deep Cleaning">Deep Cleaning</option>
+                        <option value="Office Cleaning">Office Cleaning</option>
+                        <option value="Carpet Care">Carpet Care</option>
+                        <option value="Specialty Cleaning">Specialty Cleaning</option>
+                    </select>
                     <textarea name="message" placeholder="Message" rows="4" required></textarea>
-
                     <button type="submit" class="form-submit-btn">SUBMIT</button>
-                </form>
+               </form>
             </div>
         </div>
     </section>
 
     <div class="cta-container">
-        <a href="#" class="btn-blue">BOOK YOUR SERVICE NOW</a>
+        <a href="{% url 'book' %}" class="btn-blue">BOOK YOUR SERVICE NOW</a>
     </div>
 
     <footer>

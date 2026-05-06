@@ -1,12 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .forms import QuoteForm
-# CRITICAL FIX: All models must be imported here to avoid NameError
+from django.core.mail import send_mail
+from django.conf import settings
+from .forms import QuoteForm, BookingForm
 from .models import QuoteRequest, Service, GalleryImage, StaffMember
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from .models import Service, GalleryImage, QuoteRequest # Ensure GalleryImage is here
-# --- PUBLIC PAGES ---
 
 def home(request):
     if request.method == 'POST':
@@ -15,15 +12,10 @@ def home(request):
             form.save()
             messages.success(request, "Your quote request has been sent successfully!")
             return redirect('home')
-        else:
-            # This prints the reason for failure in your terminal/console
-            print(form.errors)
-            messages.error(request, "Please correct the errors below.")
     else:
         form = QuoteForm()
 
     return render(request, 'home.html', {'form': form})
-
 
 def services(request):
     services_list = Service.objects.all()
@@ -42,16 +34,16 @@ def gallery(request):
 # --- ADMIN DASHBOARD OVERVIEW ---
 
 def admin_dashboard(request):
-    inquiries_list = QuoteRequest.objects.all().order_by('-created_at')[:5]
-    return render(request, 'dashboard/admin_dashboard.html', {
-        'inquiries': inquiries_list
-    })
+    return redirect('inquiries_list')
+
 def inquiries_list(request):
-    inquiries = QuoteRequest.objects.all().order_by('-created_at')
-    return render(request, 'dashboard/inquiries.html', {'inquiries': inquiries})
-
-
-# --- SERVICE MANAGEMENT ---
+    pending = QuoteRequest.objects.filter(status='Pending').order_by('-created_at')
+    completed = QuoteRequest.objects.filter(status='Completed').order_by('-created_at')
+    return render(request, 'dashboard/inquiries.html', {
+        'pending': pending,
+        'completed': completed,
+        'inquiries': QuoteRequest.objects.all().order_by('-created_at')  # keep for any other use
+    })
 
 def services_manage(request):
     # Fetch from database
@@ -173,5 +165,43 @@ def edit_staff(request, pk):
     
     return render(request, 'dashboard/edit_staff.html', {'person': person})
 
+def book(request):
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your booking has been submitted!")
+            return redirect('book')
+        else:
+            # ADD THIS — print errors to console or pass to template
+            print("Form errors:", form.errors)  # Check your terminal
+            messages.error(request, f"Form error: {form.errors}")  # Show in browser
+    else:
+        form = BookingForm()
+
+    return render(request, 'book.html', {'form': form})
 
 
+def reply_inquiry(request, pk):
+    inquiry = get_object_or_404(QuoteRequest, pk=pk)
+    if request.method == 'POST':
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        send_mail(
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [inquiry.email],
+            fail_silently=False,
+        )
+        messages.success(request, f"Reply sent to {inquiry.email}!")
+        return redirect('inquiries_list')
+    return render(request, 'dashboard/reply_inquiry.html', {'inquiry': inquiry})
+
+def mark_complete(request, pk):
+    inquiry = get_object_or_404(QuoteRequest, pk=pk)
+    if request.method == 'POST':
+        inquiry.status = 'Completed'
+        inquiry.save()
+        messages.success(request, f"{inquiry.name}'s inquiry marked as complete.")
+    return redirect('inquiries_list')

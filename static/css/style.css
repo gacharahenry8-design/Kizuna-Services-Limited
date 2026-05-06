@@ -845,4 +845,34 @@ h2.centered {
     .gallery-hero h1 {
         font-size: 26px;
     }
+
+}
+.sidebar {
+    width: 250px; /* Or whatever width you prefer */
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #0b3d59; /* Your dark blue color */
+    overflow-x: hidden; /* Prevents horizontal scroll within sidebar */
+    transition: all 0.3s;
+    z-index: 1000;
+}
+.main-content {
+    margin-left: 250px; /* Must match the sidebar width */
+    width: calc(100% - 250px);
+    padding: 20px;
+}
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    margin: 4px 10px; /* Adding a small margin keeps the blue box from touching the edges */
+    border-radius: 8px; /* Gives that modern look */
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar-link.active {
+    background-color: #2563eb; /* The bright blue in your screenshot */
 }

@@ -3,52 +3,137 @@
 {% block page_title %}Service Inquiries{% endblock %}
 
 {% block dashboard_content %}
-<div class="bg-white rounded-xl shadow-sm overflow-hidden border">
-    <div class="p-6 border-b flex justify-between items-center">
-        <h3 class="text-lg font-bold text-gray-800">Client Requests</h3>
-        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">
-            {{ inquiries.count }} Total
-        </span>
-    </div>
 
+<!-- Tabs -->
+<div class="flex space-x-2 mb-6">
+    <button onclick="showTab('pending')"
+        id="tab-pending"
+        class="px-5 py-2 rounded-lg font-bold text-sm bg-[#0a3d62] text-white transition">
+        Pending <span class="ml-1 bg-yellow-400 text-black text-xs px-2 py-0.5 rounded-full">{{ pending.count }}</span>
+    </button>
+    <button onclick="showTab('completed')"
+        id="tab-completed"
+        class="px-5 py-2 rounded-lg font-bold text-sm bg-gray-200 text-gray-700 transition">
+        Completed <span class="ml-1 bg-green-500 text-white text-xs px-2 py-0.5 rounded-full">{{ completed.count }}</span>
+    </button>
+</div>
+
+<!-- Pending Tab -->
+<div id="pending" class="bg-white rounded-xl shadow-sm overflow-hidden border">
+    <div class="p-6 border-b">
+        <h3 class="text-lg font-bold text-gray-800">Pending Inquiries</h3>
+    </div>
     <table class="w-full text-left border-collapse">
         <thead class="bg-gray-50">
             <tr class="text-gray-600 text-sm uppercase">
                 <th class="p-4 font-bold border-b">Customer</th>
                 <th class="p-4 font-bold border-b">Contact Info</th>
                 <th class="p-4 font-bold border-b">Message</th>
-                <th class="p-4 font-bold border-b text-center">Status</th>
+                <th class="p-4 font-bold border-b text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for inquiry in inquiries %}
+            {% for inquiry in pending %}
             <tr class="hover:bg-gray-50 transition border-b">
                 <td class="p-4">
                     <div class="font-bold text-gray-800">{{ inquiry.name }}</div>
+                    <div class="text-xs text-blue-500">{{ inquiry.service_type }}</div>
                     <div class="text-xs text-gray-400">{{ inquiry.created_at|date:"D, d M Y" }}</div>
                 </td>
                 <td class="p-4">
                     <div class="text-sm text-blue-600">{{ inquiry.email }}</div>
+                    {% if inquiry.phone %}
+                    <div class="text-xs text-gray-500"><i class="fas fa-phone mr-1"></i>{{ inquiry.phone }}</div>
+                    {% endif %}
                     {% if inquiry.website %}
                     <div class="text-xs text-gray-500">{{ inquiry.website }}</div>
                     {% endif %}
                 </td>
-                <td class="p-4 text-sm text-gray-600">
-                    {{ inquiry.message|truncatewords:15 }}
-                </td>
-                <td class="p-4 text-center">
-                    <span class="px-3 py-1 bg-green-100 text-green-700 text-xs rounded-full font-bold">Received</span>
+                <td class="p-4 text-sm text-gray-600">{{ inquiry.message|truncatewords:15 }}</td>
+                <td class="p-4 text-center space-x-2">
+                    <a href="{% url 'reply_inquiry' inquiry.pk %}"
+                       style="background:#0a3d62; color:white; padding:6px 14px; border-radius:5px; text-decoration:none; font-size:13px; display:inline-block;">
+                        <i class="fas fa-reply"></i> Reply
+                    </a>
+                    <form method="POST" action="{% url 'mark_complete' inquiry.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit"
+                            style="background:#16a34a; color:white; padding:6px 14px; border-radius:5px; border:none; font-size:13px; cursor:pointer;">
+                            <i class="fas fa-check"></i> Done
+                        </button>
+                    </form>
                 </td>
             </tr>
             {% empty %}
             <tr>
                 <td colspan="4" class="p-12 text-center text-gray-400">
                     <i class="fas fa-inbox text-4xl mb-2 block"></i>
-                    No inquiries recorded yet.
+                    No pending inquiries.
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+
+<!-- Completed Tab -->
+<div id="completed" class="bg-white rounded-xl shadow-sm overflow-hidden border" style="display:none;">
+    <div class="p-6 border-b">
+        <h3 class="text-lg font-bold text-gray-800">Completed Services</h3>
+    </div>
+    <table class="w-full text-left border-collapse">
+        <thead class="bg-gray-50">
+            <tr class="text-gray-600 text-sm uppercase">
+                <th class="p-4 font-bold border-b">Customer</th>
+                <th class="p-4 font-bold border-b">Contact Info</th>
+                <th class="p-4 font-bold border-b">Message</th>
+                <th class="p-4 font-bold border-b text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inquiry in completed %}
+            <tr class="hover:bg-gray-50 transition border-b">
+                <td class="p-4">
+                    <div class="font-bold text-gray-800">{{ inquiry.name }}</div>
+                    <div class="text-xs text-blue-500">{{ inquiry.service_type }}</div>
+                    <div class="text-xs text-gray-400">{{ inquiry.created_at|date:"D, d M Y" }}</div>
+                </td>
+                <td class="p-4">
+                    <div class="text-sm text-blue-600">{{ inquiry.email }}</div>
+                    {% if inquiry.phone %}
+                    <div class="text-xs text-gray-500"><i class="fas fa-phone mr-1"></i>{{ inquiry.phone }}</div>
+                    {% endif %}
+                    {% if inquiry.website %}
+                    <div class="text-xs text-gray-500">{{ inquiry.website }}</div>
+                    {% endif %}
+                </td>
+                <td class="p-4 text-sm text-gray-600">{{ inquiry.message|truncatewords:15 }}</td>
+                <td class="p-4 text-center">
+                    <a href="{% url 'reply_inquiry' inquiry.pk %}"
+                       style="background:#0a3d62; color:white; padding:6px 14px; border-radius:5px; text-decoration:none; font-size:13px; display:inline-block;">
+                        <i class="fas fa-reply"></i> Reply
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="p-12 text-center text-gray-400">
+                    <i class="fas fa-check-circle text-4xl mb-2 block"></i>
+                    No completed services yet.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+function showTab(tab) {
+    document.getElementById('pending').style.display = tab === 'pending' ? 'block' : 'none';
+    document.getElementById('completed').style.display = tab === 'completed' ? 'block' : 'none';
+    document.getElementById('tab-pending').className = `px-5 py-2 rounded-lg font-bold text-sm transition ${tab === 'pending' ? 'bg-[#0a3d62] text-white' : 'bg-gray-200 text-gray-700'}`;
+    document.getElementById('tab-completed').className = `px-5 py-2 rounded-lg font-bold text-sm transition ${tab === 'completed' ? 'bg-[#0a3d62] text-white' : 'bg-gray-200 text-gray-700'}`;
+}
+</script>
+
 {% endblock %}

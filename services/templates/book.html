@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Service | Golden Crest Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="/services/">Services</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/gallery/">Gallery</a></li>
+                <li><a href="{% url 'book' %}" class="active">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-title" style="background-image: linear-gradient(rgba(11, 61, 89, 0.8), rgba(11, 61, 89, 0.8)), url('{% static "images/hero-bg.jpg" %}'); height: 300px;">
+        <h1>SECURE YOUR CLEANING APPOINTMENT</h1>
+        <p style="color: white; font-size: 1.1rem; margin-top: 10px;">Select your preferred time and service below.</p>
+    </section>
+
+    <section class="booking-section" style="padding: 60px 20px; max-width: 800px; margin: 0 auto;">
+        <div class="form-wrapper" style="background: white; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <h2 style="color: #0b3d59; text-align: center; margin-bottom: 30px;">APPOINTMENT DETAILS</h2>
+
+            <form method="POST" action="{% url 'book' %}">
+                {% csrf_token %}
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <label style="display:block; margin-bottom: 5px; font-weight: bold;">Full Name</label>
+                        <input type="text" name="name" placeholder="John Doe" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px;">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom: 5px; font-weight: bold;">Phone Number</label>
+                        <input type="text" name="phone" placeholder="+254..." required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px;">
+                    </div>
+                </div>
+
+                <label style="display:block; margin-bottom: 5px; font-weight: bold;">Email Address</label>
+                <input type="email" name="email" placeholder="email@example.com" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px;">
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <label style="display:block; margin-bottom: 5px; font-weight: bold;">Preferred Date</label>
+                        <input type="date" name="date" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px;">
+                    </div>
+                    <div>
+                        <label style="display:block; margin-bottom: 5px; font-weight: bold;">Select Service</label>
+                        <select name="service_type" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px;">
+                            <option value="Deep Cleaning">Deep Cleaning</option>
+                            <option value="Office Cleaning">Office Cleaning</option>
+                            <option value="Carpet Care">Carpet Care</option>
+                            <option value="Residential Cleaning">Residential Cleaning</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label style="display:block; margin-bottom: 5px; font-weight: bold;">Physical Address/Location</label>
+                <input type="text" name="location" placeholder="e.g. Apartment, Street, Area" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px;">
+
+                <label style="display:block; margin-bottom: 5px; font-weight: bold;">Additional Notes</label>
+                <textarea name="message" placeholder="Special instructions for our team..." rows="4" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:5px;"></textarea>
+
+                <button type="submit" class="form-submit-btn" style="width: 100%; padding: 15px; background: #0b3d59; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s;">
+                    CONFIRM BOOKING
+                </button>
+            </form>
+        </div>
+            {% if messages %}
+                    <div id="success-popup" style="
+                        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                        background: rgba(0,0,0,0.5); display: flex; align-items: center;
+                        justify-content: center; z-index: 9999;">
+                        <div style="
+                            background: white; padding: 50px 40px; border-radius: 12px;
+                            text-align: center; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                            <div style="font-size: 60px; color: #28a745; margin-bottom: 20px;">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h2 style="color: #0b3d59; margin-bottom: 10px;">Booking Confirmed!</h2>
+                            <p style="color: #666; margin-bottom: 30px;">Thank you! Our team will contact you shortly to confirm your appointment.</p>
+                            <button onclick="document.getElementById('success-popup').style.display='none'"
+                                style="background: #0b3d59; color: white; border: none; padding: 12px 30px;
+                                border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 15px;">
+                                OK
+                            </button>
+                        </div>
+                    </div>
+            {% endif %}
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
+                <span><i class="fas fa-envelope"></i> info@goldencrestservices.co.ke</span>
+                <span><i class="fas fa-phone"></i> +254 707 932 580</span>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
