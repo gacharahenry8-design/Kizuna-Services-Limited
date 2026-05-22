@@ -1,30 +1,12 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery | Golden Crest Services</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Gallery | Kizuna Services Limited{% endblock %}
 
-    <header>
-        <div class="logo-container">
-            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/services/">Services</a></li>
-                <li><a href="/about/">About</a></li>
-                <li><a href="/gallery/" class="active">Gallery</a></li>
-                <li><a href="#">Book Now</a></li>
-            </ul>
-        </nav>
-    </header>
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+{% endblock %}
+
+{% block content %}
 
     <!-- Hero -->
     <section class="gallery-hero">
@@ -36,137 +18,65 @@
     <section class="gallery-section">
         <div class="gallery-inner">
             <span class="section-tag">Our Work</span>
-            <h2>Before & After Transformations</h2>
+            <h2>Before &amp; After Transformations</h2>
 
             <!-- Filter Buttons -->
             <div class="filter-bar">
                 <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
-                <button class="filter-btn" onclick="filterGallery('residential', this)">Residential</button>
-                <button class="filter-btn" onclick="filterGallery('commercial', this)">Commercial</button>
-                <button class="filter-btn" onclick="filterGallery('carpet', this)">Carpet Care</button>
+                <button class="filter-btn" onclick="filterGallery('Residential', this)">Residential</button>
+                <button class="filter-btn" onclick="filterGallery('Commercial', this)">Commercial</button>
             </div>
 
             <div class="photo-grid">
-                <div class="photo-item" data-category="residential">
-                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&auto=format&fit=crop" alt="Bedroom Clean">
-                    <div class="photo-overlay"><span>Residential Cleaning</span></div>
+                {% for img in images %}
+                <div class="photo-item" data-category="{{ img.category }}">
+                    <img src="{{ img.get_image_url }}" alt="{{ img.title }}">
+                    <div class="photo-overlay"><span>{{ img.title }}</span></div>
                 </div>
-                <div class="photo-item" data-category="commercial">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&auto=format&fit=crop" alt="Office Clean">
-                    <div class="photo-overlay"><span>Office Cleaning</span></div>
-                </div>
-                <div class="photo-item" data-category="residential">
-                    <img src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=500&auto=format&fit=crop" alt="Living Room">
-                    <div class="photo-overlay"><span>Living Room Clean</span></div>
-                </div>
-                <div class="photo-item" data-category="residential">
-                    <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=500&auto=format&fit=crop" alt="Kitchen Clean">
-                    <div class="photo-overlay"><span>Kitchen Deep Clean</span></div>
-                </div>
-                <div class="photo-item" data-category="carpet">
-                    <img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop" alt="Carpet Care">
-                    <div class="photo-overlay"><span>Carpet Care</span></div>
-                </div>
-                <div class="photo-item" data-category="commercial">
-                    <img src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=500&auto=format&fit=crop" alt="Commercial Kitchen">
-                    <div class="photo-overlay"><span>Commercial Kitchen</span></div>
-                </div>
-                <div class="photo-item" data-category="residential">
-                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&auto=format&fit=crop" alt="Bathroom Clean">
-                    <div class="photo-overlay"><span>Bathroom Sanitizing</span></div>
-                </div>
-                <div class="photo-item" data-category="commercial">
-                    <img src="https://i.pinimg.com/736x/a9/98/f0/a998f036d74262cf0c29c56f10c28226.jpg" alt="Golden Crest Office Cleaning Services">
-                    <div class="photo-overlay"><span>Floor Polishing</span></div>
-                </div>
-                <div class="photo-item" data-category="carpet">
-                    <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=500&auto=format&fit=crop" alt="Carpet Clean">
-                    <div class="photo-overlay"><span>Carpet Deep Clean</span></div>
-                </div>
+                {% empty %}
+                <p style="color:#999; text-align:center; grid-column: 1/-1; padding: 40px 0;">
+                    No images uploaded yet.
+                </p>
+                {% endfor %}
             </div>
         </div>
     </section>
 
-    <!-- Videos Section -->
-    <section class="videos-section">
-        <div class="gallery-inner">
-            <span class="section-tag">Cleaning Tips</span>
-            <h2>How-To Cleaning Videos</h2>
-            <p class="section-sub">Simple, practical cleaning tips from our professional team</p>
+    <!-- Videos Section — only shows if videos exist -->
+    {% if videos %}
+        <section class="videos-section">
+            <div class="gallery-inner">
+                <span class="section-tag">Cleaning Tips</span>
+                <h2>How-To Cleaning Videos</h2>
+                <p class="section-sub">Simple, practical cleaning tips from our professional team</p>
 
-            <div class="videos-grid">
-
-                <div class="video-card">
-                    <div class="video-wrap">
-                        <!-- Replace YOUTUBE_ID_1 with your actual YouTube video ID -->
-                        <iframe
-                            src="https://www.youtube.com/embed/YOUTUBE_ID_1"
-                            title="How to Deep Clean Your Kitchen"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="video-info">
-                        <h4>How to Deep Clean Your Kitchen</h4>
-                        <p>Step-by-step guide to getting your kitchen spotless from top to bottom.</p>
+                <div class="videos-grid">
+                    {% for video in videos %}
+                    <div class="video-card">
+                        <a href="https://www.youtube.com/watch?v={{ video.youtube_id }}"
+                           target="_blank" rel="noopener noreferrer"
+                           style="display:block; position:relative;">
+                            <img src="https://img.youtube.com/vi/{{ video.youtube_id }}/hqdefault.jpg"
+                                 alt="{{ video.title }}"
+                                 style="width:100%; display:block; border-radius:8px;">
+                            <div style="position:absolute; inset:0; display:flex; align-items:center;
+                                        justify-content:center; background:rgba(0,0,0,0.3); border-radius:8px;">
+                                <div style="width:56px; height:56px; background:#cc0000; border-radius:50%;
+                                            display:flex; align-items:center; justify-content:center;">
+                                    <i class="fas fa-play" style="color:white; margin-left:4px;"></i>
+                                </div>
+                                </div>
+                            </a>
+                            <div class="video-info">
+                                <h4>{{ video.title }}</h4>
+                                <p>{{ video.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
-
-                <div class="video-card">
-                    <div class="video-wrap">
-                        <!-- Replace YOUTUBE_ID_2 with your actual YouTube video ID -->
-                        <iframe
-                            src="https://www.youtube.com/embed/YOUTUBE_ID_2"
-                            title="Bathroom Cleaning Tips"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="video-info">
-                        <h4>Bathroom Cleaning Tips</h4>
-                        <p>Quick and effective techniques to keep your bathroom fresh and hygienic.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrap">
-                        <!-- Replace YOUTUBE_ID_3 with your actual YouTube video ID -->
-                        <iframe
-                            src="https://www.youtube.com/embed/YOUTUBE_ID_3"
-                            title="Carpet Stain Removal"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="video-info">
-                        <h4>Carpet Stain Removal Guide</h4>
-                        <p>How to remove tough stains from carpets using simple household products.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrap">
-                        <!-- Replace YOUTUBE_ID_4 with your actual YouTube video ID -->
-                        <iframe
-                            src="https://www.youtube.com/embed/YOUTUBE_ID_4"
-                            title="Office Cleaning Routine"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                    <div class="video-info">
-                        <h4>Office Cleaning Routine</h4>
-                        <p>A professional daily office cleaning routine to maintain a productive workspace.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
+        </section>
+    {% endif %}
 
     <div class="cta-container">
         <a href="{% url 'book' %}" class="btn-blue">BOOK YOUR SERVICE NOW</a>
@@ -176,7 +86,7 @@
         <div class="footer-content">
             <div class="footer-info">
                 <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
-                <span><i class="fas fa-envelope"></i> info@goldencrestservices.co.ke</span>
+                <span><i class="fas fa-envelope"></i> info@kizunaserviceslimited.co.ke</span>
                 <span><i class="fas fa-phone"></i> +254 707 932 580</span>
             </div>
             <div class="social-icons">
@@ -201,5 +111,5 @@
         }
     </script>
 
-</body>
-</html>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Kizuna Services Limited{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Kizuna Services Limited" class="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}" {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}>Home</a></li>
+                <li><a href="{% url 'services' %}" {% if request.resolver_match.url_name == 'services' %}class="active"{% endif %}>Services</a></li>
+                <li><a href="{% url 'about' %}" {% if request.resolver_match.url_name == 'about' %}class="active"{% endif %}>About</a></li>
+                <li><a href="{% url 'gallery' %}" {% if request.resolver_match.url_name == 'gallery' %}class="active"{% endif %}>Gallery</a></li>
+                <li><a href="{% url 'contact' %}" {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %}>Contact Us</a></li>
+                <li>
+                    <a href="{% url 'book' %}" style="background-color:#1a73e8;color:white;padding:8px 16px;border-radius:6px;"
+                       {% if request.resolver_match.url_name == 'book' %}class="active"{% endif %}>Book Now</a>
+                </li>
+                <li>
+                    <a href="{% url 'career' %}" style="background-color:#f0a500;color:white;padding:8px 16px;border-radius:6px;"
+                       {% if request.resolver_match.url_name == 'career' %}class="active"{% endif %}>Career</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+
+</body>
+</html>

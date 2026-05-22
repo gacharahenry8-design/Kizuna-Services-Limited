@@ -1,29 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book a Service | Golden Crest Services</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Book Now | Kizuna Services Limited{% endblock %}
 
-    <header>
-        <div class="logo-container">
-            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="/services/">Services</a></li>
-                <li><a href="/about/">About</a></li>
-                <li><a href="/gallery/">Gallery</a></li>
-                <li><a href="{% url 'book' %}" class="active">Book Now</a></li>
-            </ul>
-        </nav>
-    </header>
+{% block content %}
 
     <section class="hero-title" style="background-image: linear-gradient(rgba(11, 61, 89, 0.8), rgba(11, 61, 89, 0.8)), url('{% static "images/hero-bg.jpg" %}'); height: 300px;">
         <h1>SECURE YOUR CLEANING APPOINTMENT</h1>
@@ -71,7 +49,7 @@
                 <input type="text" name="location" placeholder="e.g. Apartment, Street, Area" required style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:5px;">
 
                 <label style="display:block; margin-bottom: 5px; font-weight: bold;">Additional Notes</label>
-                <textarea name="message" placeholder="Special instructions for our team..." rows="4" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:5px;"></textarea>
+                <textarea name="message" placeholder="Additional notes (optional)" rows="4"></textarea>
 
                 <button type="submit" class="form-submit-btn" style="width: 100%; padding: 15px; background: #0b3d59; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s;">
                     CONFIRM BOOKING
@@ -105,7 +83,7 @@
         <div class="footer-content">
             <div class="footer-info">
                 <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
-                <span><i class="fas fa-envelope"></i> info@goldencrestservices.co.ke</span>
+                <span><i class="fas fa-envelope"></i> info@kizunaserviceslimited.co.ke</span>
                 <span><i class="fas fa-phone"></i> +254 707 932 580</span>
             </div>
             <div class="social-icons">
@@ -116,5 +94,5 @@
         </div>
     </footer>
 
-</body>
-</html>
+
+{% endblock %}

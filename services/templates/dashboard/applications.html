@@ -1,0 +1,108 @@
+{% extends 'dashboard/admin_dashboard.html' %}
+{% block page_title %}Career Applications{% endblock %}
+
+{% block dashboard_content %}
+<div class="p-6">
+
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="mb-4 px-4 py-3 bg-green-100 text-green-800 rounded-lg border border-green-200">
+            <i class="fas fa-check-circle mr-2"></i>{{ msg }}
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="bg-white rounded-xl shadow-md p-6">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800">
+            <i class="fas fa-briefcase mr-2 text-blue-600"></i>
+            Career Applications
+            <span class="text-base font-normal text-gray-400 ml-2">({{ applications|length }} total)</span>
+        </h2>
+
+        {% if applications %}
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="bg-[#0a3d62] text-white">
+                    <tr>
+                        <th class="px-4 py-3">#</th>
+                        <th class="px-4 py-3">Name</th>
+                        <th class="px-4 py-3">Position</th>
+                        <th class="px-4 py-3">Email</th>
+                        <th class="px-4 py-3">Phone</th>
+                        <th class="px-4 py-3">Experience</th>
+                        <th class="px-4 py-3">CV</th>
+                        <th class="px-4 py-3">Submitted</th>
+                        <th class="px-4 py-3">Status</th>
+                        <th class="px-4 py-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                {% for app in applications %}
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-4 py-3 text-gray-500">{{ forloop.counter }}</td>
+                        <td class="px-4 py-3 font-semibold text-gray-800">{{ app.full_name }}</td>
+                        <td class="px-4 py-3 text-gray-700">{{ app.position }}</td>
+                        <td class="px-4 py-3">
+                            <a href="mailto:{{ app.email }}" class="text-blue-600 hover:underline">{{ app.email }}</a>
+                        </td>
+                        <td class="px-4 py-3 text-gray-700">{{ app.phone_number }}</td>
+                        <td class="px-4 py-3 text-gray-700">{{ app.experience }}</td>
+                        <td class="px-4 py-3">
+                            {% if app.cv %}
+                                <a href="{{ app.cv.url }}" target="_blank"
+                                   class="inline-flex items-center gap-1 text-blue-600 hover:underline">
+                                    <i class="fas fa-file-pdf text-red-500"></i> View CV
+                                </a>
+                            {% else %}
+                                <span class="text-gray-400 text-xs">None</span>
+                            {% endif %}
+                        </td>
+                        <td class="px-4 py-3 text-gray-500 whitespace-nowrap">{{ app.submitted_at|date:"d M Y" }}</td>
+                        <td class="px-4 py-3">
+                            {% if app.status == 'New' %}
+                                <span class="px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">New</span>
+                            {% elif app.status == 'Reviewed' %}
+                                <span class="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700">Reviewed</span>
+                            {% elif app.status == 'Shortlisted' %}
+                                <span class="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Shortlisted</span>
+                            {% elif app.status == 'Rejected' %}
+                                <span class="px-2 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">Rejected</span>
+                            {% endif %}
+                        </td>
+                        <td class="px-4 py-3">
+                            <div class="flex items-center gap-2">
+                                <form method="POST" action="{% url 'update_application_status' app.pk %}">
+                                    {% csrf_token %}
+                                    <select name="status" onchange="this.form.submit()"
+                                            class="text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-blue-400">
+                                        <option value="New" {% if app.status == 'New' %}selected{% endif %}>New</option>
+                                        <option value="Reviewed" {% if app.status == 'Reviewed' %}selected{% endif %}>Reviewed</option>
+                                        <option value="Shortlisted" {% if app.status == 'Shortlisted' %}selected{% endif %}>Shortlisted</option>
+                                        <option value="Rejected" {% if app.status == 'Rejected' %}selected{% endif %}>Rejected</option>
+                                    </select>
+                                </form>
+                                <form method="POST" action="{% url 'delete_application' app.pk %}"
+                                      onsubmit="return confirm('Delete this application?')">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs transition">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <div class="text-center py-16 text-gray-400">
+                <i class="fas fa-inbox text-5xl block mb-4"></i>
+                <p class="text-lg">No applications received yet.</p>
+                <p class="text-sm mt-1">Applications submitted via the careers page will appear here.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

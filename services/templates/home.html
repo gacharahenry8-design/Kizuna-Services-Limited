@@ -1,31 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en" xmlns:https="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Golden Crest Services | Professional Cleaning</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Kizuna Services Limited | Professional Cleaning{% endblock %}
 
-    <header>
-        <div class="logo-container">
-            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/home/" class="active">Home</a></li>
-                <li><a href="/services/">Services</a></li>
-                <li><a href="/about/">About</a></li>
-                <li><a href="/gallery/">Gallery</a></li>
-                <li><a href="{% url 'book' %}">Book Now</a></li>
-            </ul>
-        </nav>
-    </header>
+{% block content %}
 
-    <section class="hero-title" style="background-image: url('{% static "images/hero-bg.jpg" %}');">
+    <section class="hero-title" style="background: white;">
         <h1>PROFESSIONAL RESIDENTIAL & <br> COMMERCIAL CLEANING</h1>
     </section>
        <section class="services-block">
@@ -124,8 +102,8 @@
     <footer>
         <div class="footer-content">
             <div class="footer-info">
-                <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
-                <span><i class="fas fa-envelope"></i> info@goldencrestservices.co.ke</span>
+                 <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
+                <span><i class="fas fa-envelope"></i> info@kizunaserviceslimited.co.ke</span>
                 <span><i class="fas fa-phone"></i> +254 707 932 580</span>
             </div>
             <div class="social-icons">
@@ -136,5 +114,5 @@
         </div>
     </footer>
 
-</body>
-</html>
+
+{% endblock %}

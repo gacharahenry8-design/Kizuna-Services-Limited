@@ -1,30 +1,12 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Golden Crest Services</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/about.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}About Us | Kizuna Services Limited{% endblock %}
 
-    <header>
-        <div class="logo-container">
-            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/services/">Services</a></li>
-                <li><a href="/about/" class="active">About</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Book Now</a></li>
-            </ul>
-        </nav>
-    </header>
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
 
     <!-- Hero -->
     <section class="about-hero">
@@ -40,7 +22,7 @@
             <div class="story-text">
                 <span class="section-tag">Our Story</span>
                 <h2>Built on Trust, Driven by Excellence</h2>
-                <p>Golden Crest Services was founded with a simple belief — every space deserves to be clean, healthy, and welcoming. Based in Kasarani, Nairobi, we started as a small residential cleaning team and have grown into a full-service cleaning company serving homes, offices, and commercial spaces across the city.</p>
+                <p>Kizuna Services Limited was founded with a simple belief — every space deserves to be clean, healthy, and welcoming. Based in Kasarani, Nairobi, we started as a small residential cleaning team and have grown into a full-service cleaning company serving homes, offices, and commercial spaces across the city.</p>
                 <p>Over the years, we have built a reputation for reliability, attention to detail, and a genuine commitment to customer satisfaction. Our team is professionally trained, fully insured, and passionate about delivering results that exceed expectations every single time.</p>
             </div>
             <div class="story-image">
@@ -147,7 +129,7 @@
                     <p>{{ person.bio }}</p>
                 </div>
                 {% empty %}
-                <p>Our team is currently busy providing the Golden Crest standard!</p>
+                <p>Our team is currently busy providing the Kizuna Services Limited standard!</p>
                 {% endfor %}
             </div>
         </div>
@@ -161,7 +143,7 @@
         <div class="footer-content">
             <div class="footer-info">
                 <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
-                <span><i class="fas fa-envelope"></i> info@goldencrestservices.co.ke</span>
+                <span><i class="fas fa-envelope"></i> info@kizunaserviceslimited.co.ke</span>
                 <span><i class="fas fa-phone"></i> +254 707 932 580</span>
             </div>
             <div class="social-icons">
@@ -172,5 +154,5 @@
         </div>
     </footer>
 
-</body>
-</html>
+
+{% endblock %}

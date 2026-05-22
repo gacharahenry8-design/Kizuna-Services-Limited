@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us | Kizuna Services Limited{% endblock %}
+
+{% block content %}
+
+    <!-- Hero -->
+    <section class="contact-hero">
+        <div class="hero-inner">
+            <span class="section-tag">Get In Touch</span>
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you. Reach out for bookings, inquiries, or free quotes.</p>
+        </div>
+    </section>
+
+    <!-- Info Cards -->
+    <section class="contact-cards">
+        <div class="contact-card">
+            <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+            <h3>Location</h3>
+            <p>Kasarani, Nairobi, Kenya</p>
+        </div>
+        <div class="contact-card">
+            <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
+            <h3>Phone</h3>
+            <p>+254 707 932 580</p>
+        </div>
+        <div class="contact-card">
+            <div class="icon-box"><i class="fas fa-envelope"></i></div>
+            <h3>Email</h3>
+            <p>info@goldencrestservices.co.ke</p>
+        </div>
+        <div class="contact-card">
+            <div class="icon-box"><i class="fas fa-clock"></i></div>
+            <h3>Working Hours</h3>
+            <p>Mon – Sat: 8:00 AM – 6:00 PM</p>
+        </div>
+    </section>
+
+    <!-- Form + Map -->
+    <section class="contact-body">
+
+        <div class="contact-form-wrap">
+            <h3>Send Us A Message</h3>
+
+            {% if messages %}
+            <ul class="messages">
+                {% for msg in messages %}
+                <li class="{{ msg.tags }}">{{ msg }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <form method="POST" action="{% url 'contact' %}">
+                {% csrf_token %}
+
+                <input type="text" name="full_name" placeholder="Full Name"
+                    value="{{ form_data.full_name|default:'' }}" required>
+
+                <input type="email" name="email" placeholder="Email"
+                    value="{{ form_data.email|default:'' }}" required>
+
+                <div class="two-col">
+                    <input type="tel" name="phone" placeholder="Phone Number"
+                        value="{{ form_data.phone|default:'' }}" required>
+                    <input type="text" name="location" placeholder="Your Location"
+                        value="{{ form_data.location|default:'' }}" required>
+                </div>
+
+                <select name="service" required>
+                    <option value="" disabled {% if not form_data.service %}selected{% endif %}>Select Service Needed</option>
+                    <option value="general"           {% if form_data.service == 'general' %}selected{% endif %}>General Cleaning</option>
+                    <option value="deep"              {% if form_data.service == 'deep' %}selected{% endif %}>Deep Cleaning</option>
+                    <option value="office"            {% if form_data.service == 'office' %}selected{% endif %}>Office Cleaning</option>
+                    <option value="carpet"            {% if form_data.service == 'carpet' %}selected{% endif %}>Specialized Carpet Care</option>
+                    <option value="post-construction" {% if form_data.service == 'post-construction' %}selected{% endif %}>Post-Construction Cleaning</option>
+                </select>
+
+                <textarea name="message" placeholder="Message" rows="5" required>{{ form_data.message|default:'' }}</textarea>
+
+                <button type="submit" class="form-submit-btn">SUBMIT</button>
+            </form>
+        </div>
+
+        <div class="contact-map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63823.11197992706!2d36.852445851892095!3d-1.222956299999991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f15eb1d2e1329%3A0xc3baac5eeb346740!2sKasarani%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+        <div class="faq-inner">
+            <span class="section-tag centered">Got Questions?</span>
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <button onclick="toggleFaq(this)">
+                    Do you offer same-day cleaning?
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    Yes, depending on our schedule and team availability. It's best to call us directly for urgent requests.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button onclick="toggleFaq(this)">
+                    Do you serve areas outside Nairobi?
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    Yes, we provide services in Nairobi and surrounding regions. Please contact us to confirm if we cover your specific location.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button onclick="toggleFaq(this)">
+                    How long does deep cleaning take?
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    A deep clean typically takes anywhere from 2 to 6 hours, depending on the size of the space and its current condition.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button onclick="toggleFaq(this)">
+                    Do you bring your own cleaning supplies?
+                    <i class="fas fa-chevron-down faq-icon"></i>
+                </button>
+                <div class="faq-answer">
+                    Yes, our team arrives fully equipped with professional-grade, eco-friendly cleaning products and all necessary equipment.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="contact-cta">
+        <h2>Need Urgent Cleaning Services?</h2>
+        <p>Our professional team is ready to make your space shine. Reach out to us immediately.</p>
+        <div class="cta-btn-row">
+            <a href="tel:+254707932580" class="btn-cta btn-cta-blue">
+                <i class="fas fa-phone-alt"></i> Call Us Today
+            </a>
+            <a href="https://wa.me/254707932580" target="_blank" class="btn-cta btn-cta-green">
+                <i class="fab fa-whatsapp"></i> WhatsApp Us
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
+                <span><i class="fas fa-envelope"></i> info@kizunaserviceslimited.co.ke</span>
+                <span><i class="fas fa-phone"></i> +254 707 932 580</span>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            document.querySelectorAll('.faq-item').forEach(f => {
+                if (f !== item) f.classList.remove('active');
+            });
+            item.classList.toggle('active');
+        }
+    </script>
+
+
+{% endblock %}

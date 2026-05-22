@@ -1,4 +1,5 @@
 from django.db import models
+from django.db import models
 
 
 class QuoteRequest(models.Model):
@@ -36,13 +37,20 @@ class Service(models.Model):
 
 class GalleryImage(models.Model):
     title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='gallery/')
+    image = models.ImageField(upload_to='gallery/', blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True)  # ← ADD THIS
     category = models.CharField(max_length=50, choices=[('Residential', 'Residential'), ('Commercial', 'Commercial')])
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def get_image_url(self):
+        if self.image and self.image.name:
+            return self.image.url
+        if self.image_url:
+            return self.image_url
+        return ''
+
     def __str__(self):
         return self.title
-
 
 class StaffMember(models.Model):
     name = models.CharField(max_length=100)
@@ -62,3 +70,54 @@ class Inquiry(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.email}"
+
+class Video(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    youtube_id = models.CharField(max_length=20, help_text="Just the ID, e.g. dQw4w9WgXcQ")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+
+
+class ContactMessage(models.Model):
+    SERVICE_CHOICES = [
+        ("general", "General Cleaning"),
+        ("deep", "Deep Cleaning"),
+        ("office", "Office Cleaning"),
+        ("carpet", "Specialized Carpet Care"),
+        ("post-construction", "Post-Construction Cleaning"),
+    ]
+
+    full_name = models.CharField(max_length=150)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    location = models.CharField(max_length=150)
+    service = models.CharField(max_length=50, choices=SERVICE_CHOICES)
+    message = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.full_name} – {self.service} ({self.submitted_at.date()})"
+
+class CareerApplication(models.Model):
+    STATUS_CHOICES = [
+        ('New', 'New'),
+        ('Reviewed', 'Reviewed'),
+        ('Shortlisted', 'Shortlisted'),
+        ('Rejected', 'Rejected'),
+    ]
+    full_name = models.CharField(max_length=150)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=20)
+    position = models.CharField(max_length=100)
+    experience = models.CharField(max_length=100)
+    cover_letter = models.TextField()
+    cv = models.FileField(upload_to='cvs/', blank=True, null=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='New')
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.full_name} – {self.position} ({self.submitted_at.date()})"

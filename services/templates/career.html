@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% block title %}Careers | Kizuna Services Limited{% endblock %}
+
+{% block content %}
+
+    <section class="why-work-section">
+        <div class="section-title">
+            <h2>Why Work With Us?</h2>
+            <p>We invest in our team and create genuine opportunities for professional growth and development.</p>
+        </div>
+        <div class="grid-container max-width">
+            <div class="perk-card">
+                <div class="icon-box"><i class="fas fa-trophy"></i></div>
+                <h3>Professional Growth</h3>
+                <p>Clear pathways to advance into supervisory and management roles.</p>
+            </div>
+            <div class="perk-card">
+                <div class="icon-box"><i class="fas fa-users"></i></div>
+                <h3>Supportive Team</h3>
+                <p>Work within an inclusive culture that values your hard work and dedication.</p>
+            </div>
+            <div class="perk-card">
+                <div class="icon-box"><i class="fas fa-book-reader"></i></div>
+                <h3>Training Opportunities</h3>
+                <p>Continuous modern equipment and safety handling certifications provided.</p>
+            </div>
+            <div class="perk-card">
+                <div class="icon-box"><i class="fas fa-wallet"></i></div>
+                <h3>Competitive Pay</h3>
+                <p>Attractive remuneration structures with timely payments and bonuses.</p>
+            </div>
+            <div class="perk-card">
+                <div class="icon-box"><i class="fas fa-clock"></i></div>
+                <h3>Flexible Schedules</h3>
+                <p>Balanced full-time and contractual shift variations to fit your lifestyle.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="open-positions" class="positions-section">
+        <div class="section-title">
+            <h2>Available Vacancies</h2>
+            <p>Find a position that matches your unique skills and career objectives.</p>
+        </div>
+
+        <div class="grid-container max-width">
+            <div class="job-card">
+                <span class="job-badge full-time">Full-Time</span>
+                <h3>Cleaning Supervisor</h3>
+                <p class="job-meta"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                <div class="job-reqs">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Proven leadership skills</li>
+                        <li>Prior corporate cleaning experience</li>
+                        <li>Strong verbal communication skills</li>
+                    </ul>
+                </div>
+                <a href="#apply-form" class="btn btn-secondary apply-btn" data-job="supervisor">Apply Now</a>
+            </div>
+
+            <div class="job-card">
+                <span class="job-badge full-time">Full-Time</span>
+                <h3>Office Cleaner</h3>
+                <p class="job-meta"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                <div class="job-reqs">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Exceptional attention to detail</li>
+                        <li>Effective time management</li>
+                        <li>Reliable, punctual, and disciplined</li>
+                    </ul>
+                </div>
+                <a href="#apply-form" class="btn btn-secondary apply-btn" data-job="cleaner">Apply Now</a>
+            </div>
+
+            <div class="job-card">
+                <span class="job-badge contract">Contract</span>
+                <h3>Carpet Cleaning Technician</h3>
+                <p class="job-meta"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                <div class="job-reqs">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>Experience handling professional vacuum machinery</li>
+                        <li>Knowledge of stain treatment chemicals</li>
+                        <li>Physically fit and energetic</li>
+                    </ul>
+                </div>
+                <a href="#apply-form" class="btn btn-secondary apply-btn" data-job="technician">Apply Now</a>
+            </div>
+        </div>
+
+        <div class="internship-box max-width">
+            <div class="intern-content">
+                <h3>Looking for Student Internships?</h3>
+                <p>Kickstart your career with hands-on corporate experience. We have open slots for:</p>
+                <div class="intern-badges">
+                    <span class="badge">Marketing Intern</span>
+                    <span class="badge">Customer Support Intern</span>
+                    <span class="badge">IT Support Intern</span>
+                </div>
+            </div>
+            <a href="#apply-form" class="btn btn-outline apply-btn" data-job="intern">Explore Internships</a>
+        </div>
+    </section>
+
+    <section id="apply-form" class="form-section">
+        <div class="form-wrapper max-width">
+            <div class="form-header">
+                <h2>Application Portal</h2>
+                <p>Complete the form below accurately to submit your profile for consideration.</p>
+            </div>
+
+            <form method="POST" enctype="multipart/form-data" class="career-form">
+                {% csrf_token %}
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="id_full_name">Full Name</label>
+                        {{ form.full_name }}
+                    </div>
+                    <div class="input-group">
+                        <label for="id_email">Email Address</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="input-group">
+                        <label for="id_phone_number">Phone Number</label>
+                        {{ form.phone_number }}
+                    </div>
+                    <div class="input-group">
+                        <label for="id_position">Position Applying For</label>
+                        {{ form.position }}
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="id_experience">Years of Relevant Experience</label>
+                        {{ form.experience }}
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="id_cover_letter">Cover Letter</label>
+                        {{ form.cover_letter }}
+                    </div>
+                    <div class="input-group full-width file-upload">
+                        <label for="id_cv" class="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i> Upload Your CV (PDF format preferred)
+                        </label>
+                        {{ form.cv }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary submit-btn">Submit Application</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="section-title">
+            <h2>What Our Team Says</h2>
+        </div>
+        <div class="testimonial-container max-width">
+            <div class="testimonial-card">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p>"Working at Kizuna Services Limited has helped me grow professionally and improve my skills. The leadership genuinely cares about our well-being."</p>
+                <div class="testimonial-author">
+                    <strong>— James</strong>
+                    <span>Cleaning Supervisor</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-container max-width">
+            <div class="faq-item">
+                <h3>Do I need prior experience?</h3>
+                <p>Some of our technical roles require experience; however, we provide training for entry-level positions if you display great dedication and intent to learn.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I apply if there are no current vacancies matching my skillset?</h3>
+                <p>Absolutely. You can drop your CV using the application portal under any general category, and our HR team will save it for future openings.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="max-width">
+            <h2>Ready to transform environments with us?</h2>
+            <p>Take the first step toward a fulfilling career path today.</p>
+            <a href="#apply-form" class="btn btn-primary-light">Apply Today</a>
+        </div>
+    </section>
+
+    <script>
+        // Form auto-selector
+        document.querySelectorAll('.apply-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const jobValue = this.getAttribute('data-job');
+                const selectElement = document.getElementById('id_position');
+                if(selectElement && jobValue) {
+                    selectElement.value = jobValue;
+                }
+            });
+        });
+
+        // ADDED: Mobile Navbar Toggle Logic
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            // Switch icons between bars and close X symbol
+            const icon = navToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+    </script>
+
+{% endblock %}
