@@ -3,116 +3,105 @@
 
 {% block content %}
 
-    <section class="hero-title" style="background: white;">
-        <h1>PROFESSIONAL RESIDENTIAL & <br> COMMERCIAL CLEANING</h1>
+<!-- ✅ ONE wrapper for hero + services sharing the background image -->
+<div class="hero-services-block">
+
+    <section class="hero-title">
+        <h1>PROFESSIONAL RESIDENTIAL &amp;<br>COMMERCIAL CLEANING</h1>
+        <p class="tagline">Driven by Precision. Defined by Excellence.</p>
     </section>
-       <section class="services-block">
-        <h2>OUR PREMIER SERVICES</h2>
-        <div class="services-grid">
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-spray-can-sparkles"></i></div>
-                    <h3>Deep Cleaning</h3>
-                    <p>Deep cleaning, floor cleaning, sanitizing and more.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-briefcase"></i></div>
-                    <h3>Office Cleaning</h3>
-                    <p>Expert and insured office cleaning and maintenance services.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-couch"></i></div>
-                    <h3>Specialized Carpet Care</h3>
-                    <p>Specialized carpet care tailored for homes and businesses.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-house-chimney-crack"></i></div>
-                    <h3>Bottom Cleaning</h3>
-                    <p>Providing essential, deep, and routine cleaning.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-bucket"></i></div>
-                    <h3>Serenity Cleaning</h3>
-                    <p>Compare your cleaning wait and environment sanitation.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon-box"><i class="fas fa-wand-magic-sparkles"></i></div>
-                    <h3>Specialty Cleaning</h3>
-                    <p>Solutions for specific specialized cleaning needs.</p>
-                </div>
+
+    <h2 class="services-heading">OUR PREMIER SERVICES</h2>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="icon-box"><i class="fas fa-spray-can-sparkles"></i></div>
+            <h3>Deep Cleaning</h3>
+            <p>Deep cleaning, floor cleaning, sanitizing and more.</p>
         </div>
-
-    </section>
-
-    <section class="action-block">
-        <div class="flex-container">
-           <div class="gallery-wrapper">
-                     <div class="img-square">
-                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=500&auto=format&fit=crop" alt="Professional Office Cleaning">
-                    </div>
-
-                    <div class="img-square">
-                        <img src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=500&auto=format&fit=crop&q=60" alt="Kitchen Cleaning">
-                    </div>
-
-                    <div class="img-square">
-                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=500&auto=format&fit=crop" alt="Bathroom Sanitizing">
-                    </div>
-
-                    <div class="img-square">
-                        <img src="https://images.unsplash.com/photo-1631248207065-771ae9ac32f0?q=80&w=500&auto=format&fit=crop" alt="Modern Office Space">
-                    </div>
-
-                    <div class="img-square">
-                        <img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?q=80&w=500&auto=format&fit=crop" alt="Window Cleaning">
-                    </div>
-
-                    <div class="img-square">
-                        <a href="https://goldencrestservices.co.ke" target="_blank">
-                            <img src="https://i.pinimg.com/736x/a9/98/f0/a998f036d74262cf0c29c56f10c28226.jpg" alt="Golden Crest Office Cleaning Services">
-                        </a>
-                    </div>
-            </div>
-
-            <div class="form-wrapper">
-                <h3>GET A FREE QUOTE</h3>
-               <form method="POST" action="{% url 'home' %}">
-                    {% csrf_token %}
-                    <input type="text" name="name" placeholder="Name" required>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="text" name="phone" placeholder="Phone Number">
-                    <input type="text" name="website" placeholder="Website (Optional)">
-                    <select name="service_type" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
-                        <option value="General Cleaning">General Cleaning</option>
-                        <option value="Deep Cleaning">Deep Cleaning</option>
-                        <option value="Office Cleaning">Office Cleaning</option>
-                        <option value="Carpet Care">Carpet Care</option>
-                        <option value="Specialty Cleaning">Specialty Cleaning</option>
-                    </select>
-                    <textarea name="message" placeholder="Message" rows="4" required></textarea>
-                    <button type="submit" class="form-submit-btn">SUBMIT</button>
-               </form>
-            </div>
+        <div class="service-card">
+            <div class="icon-box"><i class="fas fa-briefcase"></i></div>
+            <h3>Office Cleaning</h3>
+            <p>Expert and insured office cleaning and maintenance services.</p>
         </div>
-    </section>
-
-    <div class="cta-container">
-        <a href="{% url 'book' %}" class="btn-blue">BOOK YOUR SERVICE NOW</a>
+        <div class="service-card">
+            <div class="icon-box"><i class="fas fa-couch"></i></div>
+            <h3>Specialized Carpet Care</h3>
+            <p>Specialized carpet care tailored for homes and businesses.</p>
+        </div>
+        <div class="service-card">
+            <div class="icon-box"><i class="fas fa-truck-moving"></i></div>
+            <h3>Move-In / Move-Out Cleaning</h3>
+            <p>Comprehensive cleaning for property transitions.</p>
+        </div>
+        <div class="service-card">
+            <div class="icon-box"><i class="fas fa-broom"></i></div>
+            <h3>Janitorial Services</h3>
+            <p>Reliable daily and scheduled cleaning solutions.</p>
+        </div>
+        <div class="service-card">
+            <div class="icon-box"><i class="fas fa-window-maximize"></i></div>
+            <h3>Window Cleaning</h3>
+            <p>Crystal-clear interior and exterior window cleaning.</p>
+        </div>
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-info">
-                 <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
-                <span><i class="fas fa-envelope"></i> info@kizunaserviceslimited.co.ke</span>
-                <span><i class="fas fa-phone"></i> +254 707 932 580</span>
+</div><!-- ✅ hero-services-block closes HERE — after services grid -->
+
+
+<!-- Gallery + Quote Form -->
+<section class="action-block">
+    <div class="flex-container">
+
+        <div class="gallery-wrapper">
+            <div class="img-square">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&auto=format&fit=crop" alt="Office">
             </div>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-x-twitter"></i></a>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <div class="img-square">
+                <img src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=500&auto=format&fit=crop" alt="Kitchen">
+            </div>
+            <div class="img-square">
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500&auto=format&fit=crop" alt="Bathroom">
+            </div>
+            <div class="img-square">
+                <img src="https://images.unsplash.com/photo-1631248207065-771ae9ac32f0?w=500&auto=format&fit=crop" alt="Modern Office">
+            </div>
+            <div class="img-square">
+                <img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&auto=format&fit=crop" alt="Carpet">
+            </div>
+            <div class="img-square">
+                <img src="https://images.unsplash.com/photo-1527515637462-cff94aca0b6a?w=500&auto=format&fit=crop" alt="Cleaning">
             </div>
         </div>
-    </footer>
+
+        <div class="form-wrapper">
+            <h3>GET A FREE QUOTE</h3>
+            <form method="POST" action="{% url 'home' %}">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="phone" placeholder="Phone Number">
+                <input type="text" name="website" placeholder="Website (Optional)">
+                <select name="service_type">
+                    <option>General Cleaning</option>
+                    <option>Deep Cleaning</option>
+                    <option>Office Cleaning</option>
+                    <option>Carpet Care</option>
+                    <option>Specialty Cleaning</option>
+                </select>
+                <textarea name="message" placeholder="Message" required></textarea>
+                <button type="submit" class="form-submit-btn">SUBMIT</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- CTA -->
+<div class="cta-container">
+    <a href="{% url 'book' %}" class="btn-teal">BOOK YOUR SERVICE NOW</a>
+</div>
 
 
 {% endblock %}

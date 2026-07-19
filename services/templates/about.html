@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}About Us | Kizuna Services Limited{% endblock %}
-
-{% block extra_css %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/about.css' %}">
-{% endblock %}
+{% block title %}About Us | Kizuna Services Limited{% endblock %}
 
 {% block content %}
 
@@ -138,21 +134,5 @@
     <div class="cta-container">
         <a href="{% url 'book' %}" class="btn-blue">BOOK YOUR SERVICE NOW</a>
     </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-info">
-                <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
-                <span><i class="fas fa-envelope"></i> info@kizunaserviceslimited.co.ke</span>
-                <span><i class="fas fa-phone"></i> +254 707 932 580</span>
-            </div>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-x-twitter"></i></a>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-        </div>
-    </footer>
-
 
 {% endblock %}

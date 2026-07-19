@@ -218,7 +218,7 @@ def add_service(request):
         Service.objects.create(
             title=title,
             description=description,
-            price_start=price,
+            price_start=price if price else 0,
             category=category,
             icon_class=icon
         )

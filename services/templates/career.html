@@ -190,32 +190,16 @@
         </div>
     </section>
 
-    <script>
-        // Form auto-selector
-        document.querySelectorAll('.apply-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const jobValue = this.getAttribute('data-job');
-                const selectElement = document.getElementById('id_position');
-                if(selectElement && jobValue) {
-                    selectElement.value = jobValue;
-                }
-            });
-        });
-
-        // ADDED: Mobile Navbar Toggle Logic
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            // Switch icons between bars and close X symbol
-            const icon = navToggle.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.replace('fa-bars', 'fa-times');
-            } else {
-                icon.classList.replace('fa-times', 'fa-bars');
+   <script>
+    document.querySelectorAll('.apply-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const jobValue = this.getAttribute('data-job');
+            const selectElement = document.getElementById('id_position');
+            if (selectElement && jobValue) {
+                selectElement.value = jobValue;
             }
         });
-    </script>
+    });
+</script>
 
 {% endblock %}

@@ -5,36 +5,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Kizuna Services Limited{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     {% block extra_css %}{% endblock %}
 </head>
+
 <body>
 
-    <header>
-        <div class="logo-container">
-            <img src="{% static 'images/logo.png' %}" alt="Kizuna Services Limited" class="logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}" {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}>Home</a></li>
-                <li><a href="{% url 'services' %}" {% if request.resolver_match.url_name == 'services' %}class="active"{% endif %}>Services</a></li>
-                <li><a href="{% url 'about' %}" {% if request.resolver_match.url_name == 'about' %}class="active"{% endif %}>About</a></li>
-                <li><a href="{% url 'gallery' %}" {% if request.resolver_match.url_name == 'gallery' %}class="active"{% endif %}>Gallery</a></li>
-                <li><a href="{% url 'contact' %}" {% if request.resolver_match.url_name == 'contact' %}class="active"{% endif %}>Contact Us</a></li>
-                <li>
-                    <a href="{% url 'book' %}" style="background-color:#1a73e8;color:white;padding:8px 16px;border-radius:6px;"
-                       {% if request.resolver_match.url_name == 'book' %}class="active"{% endif %}>Book Now</a>
-                </li>
-                <li>
-                    <a href="{% url 'career' %}" style="background-color:#f0a500;color:white;padding:8px 16px;border-radius:6px;"
-                       {% if request.resolver_match.url_name == 'career' %}class="active"{% endif %}>Career</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+<!-- ================= HEADER ================= -->
+<header class="main-header">
 
+    <div class="logo-container">
+        <img src="{% static 'images/logo.png' %}"
+             alt="Kizuna Services Limited"
+             class="logo">
+    </div>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+
+            <li>
+                <a href="{% url 'home' %}"
+                   class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                   Home
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'services' %}"
+                   class="{% if request.resolver_match.url_name == 'services' %}active{% endif %}">
+                   Services
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'about' %}"
+                   class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                   About
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'gallery' %}"
+                   class="{% if request.resolver_match.url_name == 'gallery' %}active{% endif %}">
+                   Gallery
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'contact' %}"
+                   class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                   Contact Us
+                </a>
+            </li>
+
+            <!-- Book Button -->
+            <li>
+                <a href="{% url 'book' %}"
+                   class="nav-btn book-btn {% if request.resolver_match.url_name == 'book' %}active{% endif %}">
+                   Book Now
+                </a>
+            </li>
+
+            <!-- Career Button -->
+            <li>
+                <a href="{% url 'career' %}"
+                   class="nav-btn career-btn {% if request.resolver_match.url_name == 'career' %}active{% endif %}">
+                   Career
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+</header>
+
+<!-- ================= CONTENT ================= -->
+<main>
     {% block content %}{% endblock %}
+</main>
 
+
+<!-- ================= FOOTER ================= -->
+<footer class="main-footer">
+    <div class="footer-content">
+        <div class="footer-info">
+            <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
+           <span><i class="fas fa-envelope"></i> <a href="mailto:info@kizunaservices.com">info@kizunaservices.com</a></span>
+            <span><i class="fas fa-phone"></i> +254 707 932 580</span>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

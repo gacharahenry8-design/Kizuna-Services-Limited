@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}Our Services | Kizuna Services Limited{% endblock %}
-
-{% block extra_css %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/services.css' %}">
-{% endblock %}
+{% block title %}Our Services | Kizuna Services Limited{% endblock %}
 
 {% block content %}
 
@@ -13,58 +9,37 @@
         <p>Professional, reliable and thorough cleaning solutions for every need</p>
     </section>
 
-         <section class="services-page-block">
-                {# 1. Regroup the services from the database by their category #}
-                {% regroup services by category as category_list %}
-
-                {% for category in category_list %}
-                    <div class="services-category">
-                        <h2 class="category-title">{{ category.grouper }} Cleaning</h2>
-
-                        <div class="services-page-grid">
-                            {% for service in category.list %}
-                            <div class="service-page-card">
-                                <div class="icon-box">
-                                    {# Use the icon class stored in the database #}
-                                    <i class="{{ service.icon_class|default:'fas fa-broom' }}"></i>
-                                </div>
-                                <h3>{{ service.title }}</h3>
-                                <p>{{ service.description }}</p>
-                                {% if service.price_start %}
-                                    <p class="text-sm font-bold text-blue-900 mt-2">
-                                        Starts at KES {{ service.price_start }}
-                                    </p>
-                                {% endif %}
-                            </div>
-                            {% endfor %}
+    <section class="services-page-block">
+        {% regroup services by category as category_list %}
+        {% for category in category_list %}
+            <div class="services-category">
+                <h2 class="category-title">{{ category.grouper }} Cleaning</h2>
+                <div class="services-page-grid">
+                    {% for service in category.list %}
+                    <div class="service-page-card">
+                        <div class="icon-box">
+                            <i class="{{ service.icon_class|default:'fas fa-broom' }}"></i>
                         </div>
+                        <h3>{{ service.title }}</h3>
+                        <p>{{ service.description }}</p>
+                        {% if service.price_start %}
+                            <span class="price-tag">From KES {{ service.price_start }}</span>
+                        {% endif %}
                     </div>
-                {% empty %}
-                    <div class="text-center py-20">
-                        <i class="fas fa-info-circle text-4xl text-gray-300 mb-4"></i>
-                        <p class="text-gray-500">We are currently updating our service list. Please contact us for a quote!</p>
-                    </div>
-                {% endfor %}
-         </section>
+                    {% endfor %}
+                </div>
+            </div>
+        {% empty %}
+            <div class="services-empty">
+                <i class="fas fa-info-circle"></i>
+                <p>We are currently updating our service list. Please contact us for a quote!</p>
+            </div>
+        {% endfor %}
+    </section>
 
     <div class="cta-container">
-       <a href="{% url 'book' %}" class="btn-blue">BOOK YOUR SERVICE NOW</a>
+        <a href="{% url 'book' %}" class="btn-teal">BOOK YOUR SERVICE NOW</a>
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-info">
-                <span><i class="fas fa-map-marker-alt"></i> Kasarani, Nairobi Kenya</span>
-                <span><i class="fas fa-envelope"></i> info@kizunaserviceslimited.co.ke</span>
-                <span><i class="fas fa-phone"></i> +254 707 932 580</span>
-            </div>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-x-twitter"></i></a>
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-        </div>
-    </footer>
-
-
+   
 {% endblock %}

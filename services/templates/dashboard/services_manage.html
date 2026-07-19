@@ -8,6 +8,8 @@
     title: '',
     icon: '',
     iconMap: {
+    CLEANING_ICONS = {
+    # --- Existing Icons ---
     'cleaning': 'fas fa-broom',
     'office': 'fas fa-briefcase',
     'window': 'fas fa-window-maximize',
@@ -23,6 +25,44 @@
     'laundry': 'fas fa-shirt',
     'waste': 'fas fa-trash',
     'sanitiz': 'fas fa-pump-soap',
+
+    # --- New Core Cleaning & Sanitation ---
+    'scrub': 'fas fa-soap',
+    'disinfect': 'fas fa-hand-sparkles',
+    'vacuum': 'fas fa-wind',                  # Alternative: 'fas fa-fan'
+    'pressure-wash': 'fas fa-shower',
+    'chemical': 'fas fa-flask-vial',
+    'stain-removal': 'fas fa-eraser',
+    'odor': 'fas fa-wind',
+
+    # --- Property Types & Specific Rooms ---
+    'kitchen': 'fas fa-utensils',
+    'bathroom': 'fas fa-toilet',
+    'bedroom': 'fas fa-bed',
+    'restaurant': 'fas fa-store',
+    'industrial': 'fas fa-industry',
+    'apartment': 'fas fa-building',
+    'hotel': 'fas fa-hotel',
+
+    # --- Specialized Services & Maintenance ---
+    'post-construction': 'fas fa-helmet-safety',
+    'move-in-out': 'fas fa-truck-ramp-box',   # Great for end-of-tenancy requests
+    'pool': 'fas fa-water',
+    'roof': 'fas fa-trowel-bricks',
+    'maintenance': 'fas fa-wrench',
+    'upholstery': 'fas fa-chair',
+    'allergen': 'fas fa-shield-virus',
+
+    # --- Eco & Green Cleaning ---
+    'eco': 'fas fa-seedling',
+    'bio': 'fas fa-biohazard',                # For extreme/hazardous waste cleaning
+
+    # --- Customer Trust & Booking (UI Helpers) ---
+    'clock': 'fas fa-clock',                  # Recurring / Express service
+    'price': 'fas fa-tag',                    # Quotes / Deals
+    'shield': 'fas fa-shield-halved',          # Insured / Certified team
+    'verified': 'fas fa-circle-check',        # Satisfaction guarantee
+}
     },
     updateIcon() {
         const lowerTitle = this.title.toLowerCase();
