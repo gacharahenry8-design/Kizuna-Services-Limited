@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,6 +83,11 @@ STATICFILES_DIRS = [
 
 # Add this line: This is where files are collected for production
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 WSGI_APPLICATION = 'kizuna.wsgi.application'
 

@@ -640,7 +640,7 @@ main {
 /* Hero Section for Careers */
 .career-hero {
     background: linear-gradient(rgba(11, 94, 107, 0.9), rgba(13, 59, 82, 0.9)),
-                url('../images/career-bg.jpg') center / cover;
+                url('../images/hero-bg.jpg') center center / cover no-repeat;
     color: #ffffff;
     padding: 80px 6%;
     text-align: center;
